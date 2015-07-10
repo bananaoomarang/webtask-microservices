@@ -42,26 +42,32 @@ var View = `
     </div>
     <script>
       $('#submit').click(function () {
-        $.post({{SAVE_URL}}, $('.editor').val());
+        $.post('{{SAVE_URL}}', {
+          title: '{{title}}',
+          byline: '{{byline}}',
+          body: $('.editor').val()
+        });
       });
     </script>
   </body>
 </html>
 `;
 
-return ({ data }, req, res) => {
+module.exports = ({ data }, req, res) => {
   const { MONGO_URL } = data;
   const template      = handlebars.compile(View);
 
-  let { title, text } = data;
+  let { title, text, byline } = data;
 
-  if(!title) title = 'Neato';
-  if(!text)  text  = 'neato';
+  if(!title) title   = 'Neato!';
+  if(!text)  text    = 'neato!';
+  if(!byline) byline = 'Neato!'
 
   let template_ctx = {
-    title: title,
-    text:  text,
-    html: marked(text)
+    SAVE_URL: 'https://webtask.it.auth0.com/api/run/wt-milo-auth0_com-0/post_manager?webtask_no_cache=1',
+    title:  title,
+    byline: byline,
+    html:   marked(text)
   }
 
   res.writeHead(200, { 'Content-Type': 'text/html' });

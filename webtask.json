@@ -1,0 +1,14 @@
+{
+  "post_manager": {
+    "secrets": {
+      "MONGO_URL": "mongodb://milo:829363@ds053090.mongolab.com:53090/webtaskblog"
+    }
+  },
+  "editor": {
+    "assets": ""
+  },
+  "options": {
+    "watch": true,
+    "services": "./services"
+  }
+}
