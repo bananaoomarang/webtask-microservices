@@ -97,8 +97,6 @@ Object
 
         if(params.length)  args = args.concat(['--param'], params);
 
-        console.log(params);
-
         spawn('/home/milo/wt-cli/bin/wt', args)
           .on('exit', function (code) {
             done(null, {
